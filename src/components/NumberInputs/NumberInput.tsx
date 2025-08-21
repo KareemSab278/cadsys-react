@@ -1,5 +1,11 @@
 import { NumberInput } from '@mantine/core';
 
+export {
+  BasicNumberInput,
+  AdvancedNumberInput,
+  MultipleNumbersInput,
+};
+
 function BasicNumberInput() {
   return (
     <NumberInput
@@ -42,8 +48,3 @@ function MultipleNumbersInput() {
   );
 }
 
-export {
-  BasicNumberInput,
-  AdvancedNumberInput,
-  MultipleNumbersInput,
-};

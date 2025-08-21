@@ -1,7 +1,4 @@
 import { useEffect, useState } from 'react';
-import  {BasicDataTable, EditableBasicDataTable}  from '@/components/DataTable/DataTables';
-import { BasicForm, TextInputField } from '@/components/Forms/InputForm';
-import { BasicSelectInput } from '@/components/SelectInput/SelectInputs';
 import {
   ButtonPrimaryRound,
   ButtonPrimarySquare,
@@ -10,9 +7,10 @@ import {
   SuccessButtonRound,
   SuccessButtonSquare,
 } from '../components/Buttons/Buttons';
-import { BasicNavBar } from '../components/Navigation/NavigationBar';
+import { BasicForm, TextInputField } from '@/components/Forms/InputForm';
+import { BasicSelectInput } from '@/components/SelectInput/SelectInputs';
+import { BasicDataTable, EditableBasicDataTable } from '@/components/DataTable/DataTables';
 import { BasicBars, ComplexBars, BasicPieChart, BasicLineChart } from '@/components/DataTable/BarCharts';
-
 
 const columns = [
   { field: 'id', headerName: 'Ref', width: 60 },
@@ -35,7 +33,6 @@ export function HomePage() {
         'https://info.coin-a-drink.co.uk/api/?action=scanner/get_planogram&machine_id=2666'
       );
       const received = await response.json();
-      // Map the received data to table rows
       const mappedRows = (received.plan_items || []).map((item: any) => ({
         id: item.plan_ref,
         product_id: item.product_id,
@@ -52,60 +49,45 @@ export function HomePage() {
   }, []);
 
   return (
-    <>
-      {/* <BasicNavBar /> */}
-      {/* buttons */}
-      <ButtonPrimaryRound
-        text="Primary Round"
-        onClick={() => {
-          alert('Primary Round Button Clicked!');
-        }}
-      />
-      <ButtonPrimarySquare
-        text="Primary Square"
-        onClick={() => {
-          alert('Primary Square Button Clicked!');
-        }}
-      />
-      <DangerButtonRound
-        text="Danger Round"
-        onClick={() => {
-          alert('Danger Round Button Clicked!');
-        }}
-      />
-      <DangerButtonSquare
-        text="Danger Square"
-        onClick={() => {
-          alert('Danger Square Button Clicked!');
-        }}
-      />
-      <SuccessButtonRound
-        text="Success Round"
-        onClick={() => {
-          alert('Success Round Button Clicked!');
-        }}
-      />
-      <SuccessButtonSquare
-        text="Success Square"
-        onClick={() => {
-          alert('Success Square Button Clicked!');
-        }}
-      />
-      {/* buttons */}
-      <BasicForm />
-      <TextInputField /> {/* this can be styled btw just refer to online docs */}
-      <BasicDataTable columns={columns} rows={tableData} />
-      <EditableBasicDataTable />
-      <BasicSelectInput
-        data={['React', 'Angular', 'Vue', 'Svelte', 'burger']}
-        value={selected}
-        onChange={(value) => setSelected(value ?? '')} // cannot accept null
-      />
-
-      <BasicBars />
-      <ComplexBars />
-      <BasicPieChart />
-      <BasicLineChart />
-    </>
+    <div style={{ padding: 32, maxWidth: 1200, margin: '0 auto' }}>
+      <h1>CADSYS React Component Showcase</h1>
+      <section>
+        <h2>Buttons</h2>
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24 }}>
+          <ButtonPrimaryRound text="Primary" onClick={() => alert('Primary Round Button Clicked!')} />
+          <DangerButtonRound text="Danger" onClick={() => alert('Danger Round Button Clicked!')} />
+          <SuccessButtonRound text="Success" onClick={() => alert('Success Round Button Clicked!')} />
+          {/* <ButtonPrimarySquare text="Primary" onClick={() => alert('Primary Square Button Clicked!')} /> */}
+          {/* <DangerButtonSquare text="Danger" onClick={() => alert('Danger Square Button Clicked!')} /> */}
+          {/* <SuccessButtonSquare text="Success" onClick={() => alert('Success Square Button Clicked!')} /> */}
+        </div>
+      </section>
+      <section>
+        <h2>Form & Select Input</h2>
+        <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start', marginBottom: 24 }}>
+          <BasicForm />
+          <TextInputField />
+          <BasicSelectInput
+            data={['React', 'Angular', 'Vue', 'Svelte', 'burger']}
+            value={selected}
+            onChange={(value) => setSelected(value ?? '')}
+          />
+        </div>
+      </section>
+      <section>
+        <h2>Data Table</h2>
+        <BasicDataTable columns={columns} rows={tableData} />
+        <EditableBasicDataTable />
+      </section>
+      <section>
+        <h2>Charts</h2>
+        <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 24 }}>
+          <BasicBars />
+          <ComplexBars />
+          <BasicPieChart />
+          <BasicLineChart />
+        </div>
+      </section>
+    </div>
   );
 }

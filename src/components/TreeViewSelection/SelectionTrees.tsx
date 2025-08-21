@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeItem } from '@mui/x-tree-view/TreeItem';
 
+export { BasicTreeView };
+
 function BasicTreeView() {
   return (
     <Box sx={{ minHeight: 352, minWidth: 250 }}>
@@ -26,5 +28,3 @@ function BasicTreeView() {
     </Box>
   );
 }
-
-export { BasicTreeView };

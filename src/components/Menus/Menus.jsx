@@ -1,4 +1,8 @@
 import { Button, Menu } from '@mantine/core';
+// i forgot what this component does lol
+
+export { ToggleMenu, SubMenu };
+
 
 function ToggleMenu() {
   return (
@@ -104,4 +108,3 @@ function SubMenu() {
   );
 }
 
-export { ToggleMenu, SubMenu };

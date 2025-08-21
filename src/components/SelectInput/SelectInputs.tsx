@@ -1,4 +1,8 @@
 import { Select } from '@mantine/core';
+import { Flex } from '@mantine/core';
+
+// more like 'dropdown select input' but this naming works too...
+export { BasicSelectInput };
 
 
 type BasicSelectInputProps = {
@@ -11,16 +15,21 @@ type BasicSelectInputProps = {
 
 function BasicSelectInput({ data, value, onChange, label = "Your favorite library", placeholder = "Pick value" }: BasicSelectInputProps) {
   return (
-    <Select
-      label={label}
-      placeholder={placeholder}
-      data={data}
-      value={value}
+    <Flex
+      direction={{ base: 'column', sm: 'row' }}       // THIS IS HOW TO APPLY FLEX STYLING
+      gap={{ base: 'sm', sm: 'lg' }}
+      justify={{ sm: 'center' }}
+    >
+      <Select
+        label={label}
+        placeholder={placeholder}
+        data={data}
+        value={value}
       onChange={onChange}
       clearable
     />
+    </Flex>
   );
 }
 
-export { BasicSelectInput };
 

@@ -5,9 +5,13 @@ import { TreeItem } from '@mui/x-tree-view/TreeItem';
 import { Button, Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { SuccessButtonRound } from '../Buttons/Buttons';
+import { useNavigate } from 'react-router-dom';
+
+export { BasicNavBar };
 
 function BasicNavBar() {
   const [opened, { open, close }] = useDisclosure(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -19,6 +23,9 @@ function BasicNavBar() {
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
       >
         <h2>Cadsys navigation bar</h2>
+
+        {/* ================================================= */}
+        
         <Box sx={{ minHeight: 352, minWidth: 250 }}>
           <SimpleTreeView>
             <TreeItem itemId="grid" label="Tables">
@@ -27,54 +34,62 @@ function BasicNavBar() {
                 label="Table Components"
                 onClick={() => {
                   close();
-                  window.location.href = '/tables';
+                  navigate('/tables');
                 }}
               />
-              {/* <TreeItem
-                itemId="grid-pro"
-                label="@mui/x-data-grid-pro"
-                onClick={() => {
-                  close();
-                  window.location.href = '/tables';
-                }}
-              /> */}
-              {/* <TreeItem
-                itemId="grid-premium"
-                label="@mui/x-data-grid-premium"
-                onClick={() => {
-                  close();
-                  window.location.href = '/tables';
-                }}
-              /> */}
             </TreeItem>
+
+            {/* ================================================= */}
+            
             <TreeItem itemId="pickers" label="Forms">
               <TreeItem
                 itemId="pickers-community"
                 label="Basic Form Components"
                 onClick={() => {
                   close();
-                  window.location.href = '/forms';
+                  navigate('/forms');
                 }}
               />
-              {/* <TreeItem
-                itemId="pickers-pro"
-                label="@mui/x-date-pickers-pro"
+
+              {/* ----------- */}
+
+              <TreeItem
+                itemId="pickers-community-2" // ID MUST ALWAYS BE DIFFERENT!!!
+                label="Goes nowhere"
                 onClick={() => {
                   close();
-                  window.location.href = '/forms';
+                  // navigate('/forms');
                 }}
-              /> */}
+              />
+
+
             </TreeItem>
+
+            {/* ================================================= */}
+
             <TreeItem itemId="charts" label="Charts">
               <TreeItem
                 itemId="charts-community"
                 label="Chart Components"
                 onClick={() => {
                   close();
-                  window.location.href = '/graphs';
+                  navigate('/graphs');
+                }}
+              />
+
+              {/* ----------- */}
+
+              <TreeItem
+                itemId="charts-community-2"
+                label="Goes nowhere"
+                onClick={() => {
+                  close();
+                  // navigate('/graphs');
                 }}
               />
             </TreeItem>
+
+            {/* ================================================= */}
             
             <TreeItem itemId="Buttons" label="Buttons">
               <TreeItem
@@ -82,10 +97,12 @@ function BasicNavBar() {
                 label="Button Components"
                 onClick={() => {
                   close();
-                  window.location.href = '/buttons';
+                  navigate('/buttons');
                 }}
               />
             </TreeItem>
+
+            {/* ================================================= */}
 
             <TreeItem itemId="tree-view" label="Home">
               <TreeItem
@@ -93,10 +110,24 @@ function BasicNavBar() {
                 label="Home"
                 onClick={() => {
                   close();
-                  window.location.href = '/';
+                  navigate('/');
+                }}
+              />
+
+              {/* ----------- */}
+
+              <TreeItem
+                itemId="tree-view-community-2"
+                label="Also Home"
+                onClick={() => {
+                  close();
+                  navigate('/');
                 }}
               />
             </TreeItem>
+
+            {/* ================================================= */}
+
           </SimpleTreeView>
         </Box>
       </Drawer>
@@ -107,4 +138,4 @@ function BasicNavBar() {
   );
 }
 
-export { BasicNavBar };
+

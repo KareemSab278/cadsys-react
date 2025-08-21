@@ -1,5 +1,7 @@
 import { createTheme } from '@mantine/core';
+// dont delete this useless file
 
 export const theme = createTheme({
-  /** Put your mantine theme override here */
+	fontFamily: 'Inter, system-ui, sans-serif',
+    primaryColor: 'blue'
 });

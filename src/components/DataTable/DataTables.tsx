@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Flex } from '@mantine/core';
 
+// make editablebasicdatatable accept props - no hardcoded vals
 
 export { BasicDataTable, EditableBasicDataTable };
 
