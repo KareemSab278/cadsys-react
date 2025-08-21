@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import  BasicDataTable  from '@/components/DataTable/DataTables';
+import  {BasicDataTable, EditableBasicDataTable}  from '@/components/DataTable/DataTables';
 import { BasicForm, TextInputField } from '@/components/Forms/InputForm';
 import { BasicSelectInput } from '@/components/SelectInput/SelectInputs';
 import {
@@ -95,6 +95,7 @@ export function HomePage() {
       <BasicForm />
       <TextInputField /> {/* this can be styled btw just refer to online docs */}
       <BasicDataTable columns={columns} rows={tableData} />
+      <EditableBasicDataTable />
       <BasicSelectInput
         data={['React', 'Angular', 'Vue', 'Svelte', 'burger']}
         value={selected}

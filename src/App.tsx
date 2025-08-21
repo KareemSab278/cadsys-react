@@ -3,7 +3,7 @@ import '@mantine/core/styles.css';
 import { MantineProvider } from '@mantine/core';
 import { Router } from './Router';
 import { theme } from './theme';
-import { HomePage } from './pages/Home.page';
+import { HomePage } from './pages/HomePage';
 
 export default function App() {
   return (
