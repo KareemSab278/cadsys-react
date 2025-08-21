@@ -53,7 +53,7 @@ export function HomePage() {
 
   return (
     <>
-      <BasicNavBar />
+      {/* <BasicNavBar /> */}
       {/* buttons */}
       <ButtonPrimaryRound
         text="Primary Round"
