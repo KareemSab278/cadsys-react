@@ -5,7 +5,7 @@ import {
 	DangerButtonSquare,
 	SuccessButtonRound,
 	SuccessButtonSquare,
-} from '../components/Buttons/Buttons';
+} from '../../components/Buttons/Buttons';
 
 function ButtonsPage() {
 	return (

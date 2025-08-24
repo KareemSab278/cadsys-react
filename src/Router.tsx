@@ -1,11 +1,11 @@
 // THIS ENTIRE FILE HANDLES ALL ROUTING
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { HomePage } from './pages/HomePage';
-import { ButtonsPage } from './pages/ButtonsPage';
-import { FormsPage } from './pages/FormsPage';
-import { DataTablesPage } from './pages/DataTablesPage';
-import { GraphsPage } from './pages/GraphsPage';
+import { HomePage } from './pages/components/HomePage';
+import { ButtonsPage } from './pages/components/ButtonsPage';
+import { FormsPage } from './pages/components/FormsPage';
+import { DataTablesPage } from './pages/components/DataTablesPage';
+import { GraphsPage } from './pages/components/GraphsPage';
 import { BasicNavBar } from './components/Navigation/NavigationBar';
 
 export function Router() {
@@ -14,7 +14,6 @@ export function Router() {
 
 
 const router = createBrowserRouter([
-  // i have no idea why i need basicnavbar here but meh
   {
     path: '/',
     element: <><BasicNavBar /><HomePage /></>,

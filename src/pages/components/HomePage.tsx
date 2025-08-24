@@ -6,7 +6,7 @@ import {
   DangerButtonSquare,
   SuccessButtonRound,
   SuccessButtonSquare,
-} from '../components/Buttons/Buttons';
+} from '../../components/Buttons/Buttons';
 import { BasicForm, TextInputField } from '@/components/Forms/InputForm';
 import { BasicSelectInput } from '@/components/SelectInput/SelectInputs';
 import { BasicDataTable, EditableBasicDataTable } from '@/components/DataTable/DataTables';

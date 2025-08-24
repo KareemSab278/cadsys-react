@@ -1,27 +1,24 @@
 import * as React from 'react';
-import { BarChart } from '@mui/x-charts/BarChart';
 import Typography from '@mui/material/Typography';
-import { BarPlot } from '@mui/x-charts/BarChart';
-import { LineHighlightPlot, LinePlot } from '@mui/x-charts/LineChart';
+import { BarChart, BarPlot } from '@mui/x-charts/BarChart';
 import { ChartContainer } from '@mui/x-charts/ChartContainer';
-import { AllSeriesType } from '@mui/x-charts/models';
+import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
+import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
 import { ChartsXAxis } from '@mui/x-charts/ChartsXAxis';
 import { ChartsYAxis } from '@mui/x-charts/ChartsYAxis';
-import { ChartsTooltip } from '@mui/x-charts/ChartsTooltip';
-import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
-import { DefaultizedPieValueType } from '@mui/x-charts/models';
-import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
-import { LineChart } from '@mui/x-charts/LineChart';
+import { LineChart, LineHighlightPlot, LinePlot } from '@mui/x-charts/LineChart';
+import { AllSeriesType, DefaultizedPieValueType } from '@mui/x-charts/models';
+import { pieArcLabelClasses, PieChart } from '@mui/x-charts/PieChart';
 
-////////////////////////////////////////////////////////////////////////// 
-////////////////////////////////////////////////////////////////////////// 
-////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 
 export { BasicBars, ComplexBars, BasicPieChart, BasicLineChart };
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////
 
 function BasicBars() {
   return (
@@ -34,22 +31,13 @@ function BasicBars() {
   );
 }
 
-
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////
 
 const uData = [4000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 9800, 3908, 4800, 3800, 4300];
-const xLabels = [
-  'Page A',
-  'Page B',
-  'Page C',
-  'Page D',
-  'Page E',
-  'Page F',
-  'Page G',
-];
+const xLabels = ['Page A', 'Page B', 'Page C', 'Page D', 'Page E', 'Page F', 'Page G'];
 
 export default function BasicLineChart() {
   return (
@@ -71,7 +59,6 @@ export default function BasicLineChart() {
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-
 
 // Mock data
 const mockStockData = Array.from({ length: 90 }, (_, i) => ({
@@ -149,16 +136,8 @@ function ComplexBars() {
               fontSize: 10,
             }}
           />
-          <ChartsYAxis
-            label="Price (USD)"
-            axisId="price"
-            tickLabelStyle={{ fontSize: 10 }}
-          />
-          <ChartsYAxis
-            label="Volume"
-            axisId="volume"
-            tickLabelStyle={{ fontSize: 10 }}
-          />
+          <ChartsYAxis label="Price (USD)" axisId="price" tickLabelStyle={{ fontSize: 10 }} />
+          <ChartsYAxis label="Volume" axisId="volume" tickLabelStyle={{ fontSize: 10 }} />
           <ChartsTooltip />
         </ChartContainer>
       </div>
@@ -168,9 +147,10 @@ function ComplexBars() {
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////
 
-const data = [ // mock data
+const data = [
+  // mock data
   { label: 'Group A', value: 400, color: '#0088FE' },
   { label: 'Group B', value: 300, color: '#00C49F' },
   { label: 'Group C', value: 300, color: '#FFBB28' },
@@ -214,4 +194,4 @@ function BasicPieChart() {
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////
