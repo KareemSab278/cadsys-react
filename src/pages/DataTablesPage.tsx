@@ -1,21 +1,16 @@
 import { useEffect, useState } from 'react';
-import { BasicDataTable, EditableBasicDataTable } from '@/components/DataTable/DataTables';
+import { BasicDataTable} from '../components/DataTable/DataTables';
 
 const columns = [
 	{ field: 'id', headerName: 'Ref', width: 60 },
 	{ field: 'product_id', headerName: 'Product ID', width: 100, editable: true }, // you can make elements editable by setting true
+	// refer to https://github.com/KareemSab278/booking-system/blob/main/frontend/src/components/BookingsTable.tsx
+		// if you want to delete or update fields
 	{ field: 'product_name', headerName: 'Product Name', width: 200 },
 	{ field: 'price', headerName: 'Price (£)', width: 90 },
 	{ field: 'stock', headerName: 'Stock', width: 80 },
 	{ field: 'required', headerName: 'Required', width: 80 },
 	{ field: 'plan_row', headerName: 'Row', width: 60 },
-	{ field: 'plan_col', headerName: 'Col', width: 60 },
-	{ field: 'plan_col', headerName: 'Col', width: 60 },
-	{ field: 'plan_col', headerName: 'Col', width: 60 },
-	{ field: 'plan_col', headerName: 'Col', width: 60 },
-	{ field: 'plan_col', headerName: 'Col', width: 60 },
-	{ field: 'plan_col', headerName: 'Col', width: 60 },
-
 ]; // getting an array of objects like json
 
 function DataTablesPage() {
@@ -45,9 +40,9 @@ function DataTablesPage() {
 	return (
 		<>
 			<BasicDataTable columns={columns} rows={tableData} />
-			<EditableBasicDataTable />
 		</>
 	);
 }
 
 export { DataTablesPage };
+

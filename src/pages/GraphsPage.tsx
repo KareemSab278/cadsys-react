@@ -3,11 +3,11 @@ import {
   BasicBars,
   BasicLineChart,
   BasicPieChart,
-  ComplexBars,
-} from '../components/DataTable/BarCharts';
+} from '../components/Charts/BarCharts';
 
 function GraphsPage() {
   const [Data, setData] = useState([]);
+
 
   //==============================================
   useEffect(() => {
@@ -32,7 +32,9 @@ function GraphsPage() {
 
     fetchAndSetData();
   }, []);
+  
   //==============================================
+
 
   return (
     <>
@@ -49,14 +51,6 @@ function GraphsPage() {
         seriesKeys={['value', 'required', 'price']}
       />
 
-      <ComplexBars
-        title="Complex Stock Chart"
-        description="Visualize Stock, Required, and Price"
-        apiData={Data}
-        labelKey="name"
-        seriesKeys={['value', 'required', 'price']}
-      />
-      
       <BasicPieChart />
       <BasicLineChart />
     </>

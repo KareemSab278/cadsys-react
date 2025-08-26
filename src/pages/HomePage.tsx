@@ -7,10 +7,10 @@ import {
   SuccessButtonRound,
   SuccessButtonSquare,
 } from '../components/Buttons/Buttons';
-import { BasicForm, TextInputField } from '@/components/Forms/InputForm';
-import { BasicSelectInput } from '@/components/SelectInput/SelectInputs';
-import { BasicDataTable, EditableBasicDataTable } from '@/components/DataTable/DataTables';
-import { BasicBars, ComplexBars, BasicPieChart, BasicLineChart } from '@/components/DataTable/BarCharts';
+import { BasicBars, BasicLineChart, BasicPieChart } from '../components/Charts/BarCharts';
+import { BasicDataTable } from '../components/DataTable/DataTables';
+import { BasicForm, TextInputField } from '../components/Forms/InputForm';
+import { BasicSelectInput } from '../components/SelectInput/SelectInputs';
 
 const columns = [
   { field: 'id', headerName: 'Ref', width: 60 },
@@ -26,6 +26,34 @@ const columns = [
 export function HomePage() {
   const [selected, setSelected] = useState('React');
   const [tableData, setTableData] = useState<any[]>([]);
+  const [Data, setData] = useState([]);
+
+  //==============================================
+
+  useEffect(() => {
+    async function fetchAndSetData() {
+      const response = await fetch(
+        'https://info.coin-a-drink.co.uk/api/?action=scanner/get_planogram&machine_id=2666'
+      );
+      const received = await response.json();
+
+      // Map plan_items to { name, value }
+      const mapped = Array.isArray(received.plan_items)
+        ? received.plan_items.map((item) => ({
+            name: item.product_name,
+            value: item.stock,
+            required: item.required,
+            price: item.price,
+          }))
+        : [];
+
+      setData(mapped);
+    }
+
+    fetchAndSetData();
+  }, []);
+
+  //==============================================
 
   useEffect(() => {
     async function fetchAndSetData() {
@@ -54,9 +82,15 @@ export function HomePage() {
       <section>
         <h2>Buttons</h2>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 24 }}>
-          <ButtonPrimaryRound text="Primary" onClick={() => alert('Primary Round Button Clicked!')} />
+          <ButtonPrimaryRound
+            text="Primary"
+            onClick={() => alert('Primary Round Button Clicked!')}
+          />
           <DangerButtonRound text="Danger" onClick={() => alert('Danger Round Button Clicked!')} />
-          <SuccessButtonRound text="Success" onClick={() => alert('Success Round Button Clicked!')} />
+          <SuccessButtonRound
+            text="Success"
+            onClick={() => alert('Success Round Button Clicked!')}
+          />
           {/* <ButtonPrimarySquare text="Primary" onClick={() => alert('Primary Square Button Clicked!')} /> */}
           {/* <DangerButtonSquare text="Danger" onClick={() => alert('Danger Square Button Clicked!')} /> */}
           {/* <SuccessButtonSquare text="Success" onClick={() => alert('Success Square Button Clicked!')} /> */}
@@ -77,16 +111,20 @@ export function HomePage() {
       <section>
         <h2>Data Table</h2>
         <BasicDataTable columns={columns} rows={tableData} />
-        <EditableBasicDataTable />
       </section>
       <section>
         <h2>Charts</h2>
         <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', marginBottom: 24 }}>
-          <BasicBars />
-          <ComplexBars />
-          <BasicPieChart />
-          <BasicLineChart />
+          <BasicBars
+            title="Current Stock"
+            description="Stock and Required per product"
+            apiData={Data}
+            labelKey="name"
+            seriesKeys={['value', 'required', 'price']}
+          />
         </div>
+          <BasicLineChart />
+          <BasicPieChart />
       </section>
     </div>
   );

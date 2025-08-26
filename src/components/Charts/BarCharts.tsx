@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import { BarChart, BarPlot } from '@mui/x-charts/BarChart';
 import { ChartContainer } from '@mui/x-charts/ChartContainer';
@@ -14,12 +15,61 @@ import { pieArcLabelClasses, PieChart } from '@mui/x-charts/PieChart';
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-export { BasicBars, ComplexBars, BasicPieChart, BasicLineChart };
+export { BasicBars, BasicPieChart, BasicLineChart };
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
+
+type BasicBarsProps = {
+  title: string;
+  description?: string;
+  apiData: any[];
+  labelKey?: string; // which key to use for x-axis labels
+  seriesKeys?: string[]; // which keys to use for bar series
+};
+
+function BasicBars({ // still buggy
+  title,
+  description,
+  apiData,
+  labelKey = 'name', // default to 'name'
+  seriesKeys = ['value'], // default to 'value'
+}: BasicBarsProps) {
+  // Handle loading or empty data
+  if (!apiData || !Array.isArray(apiData) || apiData.length === 0) {
+    return <Typography>No data available.</Typography>;
+  }
+
+  // Use labelKey for x-axis labels
+  const labels = apiData.map((item) => item[labelKey]);
+
+  // Map each seriesKey to a bar series
+  const chartSeries = seriesKeys.map((key) => ({
+    label: key,
+    data: apiData.map((item) => Number(item[key] ?? 0)),
+  }));
+
+  return (
+    <div
+      // style={{
+      //   padding: '20px',
+      //   margin: '20px',
+      //   border: '1px solid lightgray',
+      //   borderRadius: '8px',
+      // }}
+    >
+      <Typography variant="h6" style={{ textAlign: 'center' }}>{title}</Typography>
+      {description && (
+        <Typography variant="body2" color="text.secondary" gutterBottom style={{ textAlign: 'center' }}>
+          {description}
+        </Typography>
+      )}
+      <BarChart xAxis={[{ data: labels }]} series={chartSeries} height={400} width={1000} style={{ padding: '10px', margin: '10px', border: '1px solid lightgray', borderRadius: '8px' }} />
+    </div>
+  );
+}
 /**
  * BasicBars component
  *
@@ -36,70 +86,18 @@ export { BasicBars, ComplexBars, BasicPieChart, BasicLineChart };
  * />
  *
  * The component will automatically map the raw data to the required chart format.
- */
-type BasicBarsProps = {
-  title: string;
-  description?: string;
-  apiData: any[];
-  labelKey?: string; // which key to use for x-axis labels
-  seriesKeys?: string[]; // which keys to use for bar series
-};
+ *
+ * ----------------------------------------------------------------------
+ * Usage Example:
+ * <BasicBars
+ *   title="Current Stock"
+ *   description="Stock and Required per product"
+ *   apiData={Data}
+ *   labelKey="product_name"
+ *   seriesKeys={["stock", "required", "price"]} // show multiple bars per product
+ * />
+ **/
 
-function BasicBars({
-  title,
-  description,
-  apiData,
-  labelKey = 'name', // default to 'name'
-  seriesKeys = ['value'], // default to 'value'
-}: BasicBarsProps) {
-  // Handle loading or empty data
-  if (!apiData || !Array.isArray(apiData) || apiData.length === 0) {
-    return <Typography>No data available.</Typography>;
-  }
-
-  // Use labelKey for x-axis labels
-  const labels = apiData.map((item) => item[labelKey] ?? '');
-
-  // Map each seriesKey to a bar series
-  const chartSeries = seriesKeys.map((key) => ({
-    label: key,
-    data: apiData.map((item) => Number(item[key] ?? 0)),
-  }));
-
-  return (
-    <div
-      style={{
-        padding: '20px',
-        margin: '20px',
-        border: '1px solid lightgray',
-        borderRadius: '8px',
-      }}
-    >
-      <Typography variant="h6">{title}</Typography>
-      {description && (
-        <Typography variant="body2" color="text.secondary" gutterBottom>
-          {description}
-        </Typography>
-      )}
-      <BarChart
-        xAxis={[{ data: labels }]}
-        series={chartSeries}
-        height={300}
-        width={600}
-      />
-    </div>
-  );
-}
-
-// ----------------------------------------------------------------------
-// Usage Example:
-// <BasicBars
-//   title="Current Stock"
-//   description="Stock and Required per product"
-//   apiData={Data}
-//   labelKey="product_name"
-//   seriesKeys={["stock", "required", "price"]} // show multiple bars per product
-// />
 // ----------------------------------------------------------------------
 
 //////////////////////////////////////////////////////////////////////////
@@ -138,102 +136,6 @@ export default function BasicLineChart() {
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-// Mock data
-const mockStockData = Array.from({ length: 90 }, (_, i) => ({
-  date: `2023-01-${String(i + 1).padStart(2, '0')}`,
-  volume: Math.floor(Math.random() * 10000000 + 1000000),
-  low: Math.random() * 100 + 50,
-  high: Math.random() * 100 + 100,
-}));
-
-const series = [
-  {
-    type: 'bar',
-    yAxisId: 'volume',
-    label: 'Volume',
-    color: 'lightgray',
-    data: mockStockData.map((day) => day.volume),
-    highlightScope: { highlight: 'item' },
-  },
-  {
-    type: 'line',
-    yAxisId: 'price',
-    color: 'red',
-    label: 'Low',
-    data: mockStockData.map((day) => day.low),
-    highlightScope: { highlight: 'item' },
-  },
-  {
-    type: 'line',
-    yAxisId: 'price',
-    color: 'green',
-    label: 'High',
-    data: mockStockData.map((day) => day.high),
-  },
-] as AllSeriesType[];
-
-function ComplexBars() {
-  return (
-    <div
-      style={{
-        padding: '20px',
-        margin: '20px',
-        border: '1px solid lightgray',
-        borderRadius: '8px',
-      }}
-    >
-      <Typography>Alphabet stocks (mock data)</Typography>
-      <div>
-        <ChartContainer
-          series={series}
-          height={400}
-          xAxis={[
-            {
-              id: 'date',
-              data: mockStockData.map((day) => new Date(day.date)),
-              scaleType: 'band',
-              valueFormatter: (value) => value.toLocaleDateString(),
-              height: 40,
-            },
-          ]}
-          yAxis={[
-            { id: 'price', scaleType: 'linear', position: 'left', width: 50 },
-            {
-              id: 'volume',
-              scaleType: 'linear',
-              position: 'right',
-              valueFormatter: (value) => `${(value / 1000000).toLocaleString()}M`,
-              width: 55,
-            },
-          ]}
-        >
-          <ChartsAxisHighlight x="line" />
-          <BarPlot />
-          <LinePlot />
-          <LineHighlightPlot />
-          <ChartsXAxis
-            label="Date"
-            axisId="date"
-            tickInterval={(value, index) => {
-              return index % 30 === 0;
-            }}
-            tickLabelStyle={{
-              fontSize: 10,
-            }}
-          />
-          <ChartsYAxis label="Price (USD)" axisId="price" tickLabelStyle={{ fontSize: 10 }} />
-          <ChartsYAxis label="Volume" axisId="volume" tickLabelStyle={{ fontSize: 10 }} />
-          <ChartsTooltip />
-        </ChartContainer>
-      </div>
-    </div>
-  );
-}
-
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////
-
 const data = [
   // mock data
   { label: 'Group A', value: 400, color: '#0088FE' },
@@ -246,7 +148,7 @@ const sizing = {
   margin: { right: 5 },
   width: 200,
   height: 200,
-  hideLegend: true,
+  hideLegend: false,
 };
 
 const TOTAL = data.map((item) => item.value).reduce((a, b) => a + b, 0);

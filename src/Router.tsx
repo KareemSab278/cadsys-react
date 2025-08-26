@@ -12,7 +12,6 @@ export function Router() {
   return <RouterProvider router={router} />;
 }
 
-
 const router = createBrowserRouter([
   // i have no idea why i need basicnavbar here but meh
   {

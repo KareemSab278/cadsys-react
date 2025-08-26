@@ -1,5 +1,7 @@
 # BasicDataTable Component
 
+This README might not be fully useful but have fun.
+
 A reusable React component for displaying tabular data using Material UI's DataGrid, with Mantine Flex for layout.
 
 ## Features
