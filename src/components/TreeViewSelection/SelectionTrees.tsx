@@ -7,7 +7,7 @@ export { BasicTreeView };
 
 function BasicTreeView() {
   return (
-    <Box sx={{ minHeight: 352, minWidth: 250 }}>
+    <Box sx={{ minHeight: 352, minWidth: 250, color: 'white' }}>
       <SimpleTreeView>
         <TreeItem itemId="grid" label="Data Grid">
           <TreeItem itemId="grid-community" label="@mui/x-data-grid" />

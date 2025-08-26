@@ -7,6 +7,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { SuccessButtonRound } from '../Buttons/Buttons';
 import { useNavigate } from 'react-router-dom';
 
+// i would highly recommend we use this component: https://ui.shadcn.com/docs/components/sidebar
+
 export { BasicNavBar };
 
 function BasicNavBar() {
@@ -22,11 +24,11 @@ function BasicNavBar() {
         onClose={close}
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
       >
-        <h2>Cadsys navigation bar</h2>
+        <h2 style={{ color: 'white' }}>Cadsys navigation bar</h2>
 
         {/* ================================================= */}
-        
-        <Box sx={{ minHeight: 352, minWidth: 250 }}>
+
+        <Box sx={{ minHeight: 352, minWidth: 250, color: 'white' }}>
           <SimpleTreeView>
             <TreeItem itemId="grid" label="Tables">
               <TreeItem
